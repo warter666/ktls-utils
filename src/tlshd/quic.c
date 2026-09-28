@@ -367,6 +367,10 @@ static int quic_session_set_alpns(gnutls_session_t session, char *alpn_data)
 	while (alpn) {
 		while (*alpn == ' ')
 			alpn++;
+		if (!*alpn) {
+			alpn = strtok_r(NULL, ",", &saveptr);
+			continue;
+		}
 		alpns[count].data = (unsigned char *)alpn;
 		alpns[count].size = strlen(alpn);
 		count++;
