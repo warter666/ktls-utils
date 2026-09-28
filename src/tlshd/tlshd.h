@@ -219,7 +219,8 @@ struct tlshd_quic_msg {
  */
 struct tlshd_quic_conn {
 	struct tlshd_handshake_parms *parms;
-	char alpns[TLSHD_QUIC_MAX_ALPNS_LEN];
+	/* one byte larger than the kernel maximum, to hold the NUL */
+	char alpns[TLSHD_QUIC_MAX_ALPNS_LEN + 1];
 	uint8_t ticket[TLSHD_QUIC_MAX_DATA_LEN];
 	uint32_t ticket_len;
 	uint32_t cipher;

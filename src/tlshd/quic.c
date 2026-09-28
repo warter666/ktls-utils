@@ -422,6 +422,7 @@ static int quic_conn_get_config(struct tlshd_quic_conn *conn)
 		tlshd_log_error("socket getsockopt alpn error %d", errno);
 		return -1;
 	}
+	conn->alpns[len] = '\0';
 	len = sizeof(conn->ticket);
 	if (getsockopt(sockfd, SOL_QUIC, QUIC_SOCKOPT_SESSION_TICKET, conn->ticket, &len)) {
 		tlshd_log_error("socket getsockopt session ticket error %d", errno);
